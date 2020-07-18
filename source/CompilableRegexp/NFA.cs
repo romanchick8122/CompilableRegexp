@@ -8,7 +8,7 @@ namespace CompilableRegexp
     {
         internal class NFANode
         {
-            internal Dictionary<char, List<NFANode>> Moves = new Dictionary<char, List<NFANode>>();
+            internal IDictionary<char, List<NFANode>> Moves = new Dictionary<char, List<NFANode>>();
             internal List<NFANode> Any = new List<NFANode>();
             internal List<NFANode> Epsilon = new List<NFANode>();
             internal void AddMove(char c, NFANode target)
