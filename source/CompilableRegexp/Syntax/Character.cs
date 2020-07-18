@@ -16,7 +16,9 @@ namespace CompilableRegexp.Syntax
         {
             var terminator = new NFA.NFANode();
             entry.AddMove(Char, terminator);
-            return terminator;
+            if (Next == null)
+                return terminator;
+            return Next.ToNFANode(terminator);
         }
     }
 }
