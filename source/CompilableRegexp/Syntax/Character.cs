@@ -15,7 +15,7 @@ namespace CompilableRegexp.Syntax
         internal override NFA.NFANode ToNFANode(NFA.NFANode entry)
         {
             var terminator = new NFA.NFANode();
-            entry.Moves.Add(Char, terminator);
+            entry.AddMove(Char, terminator);
             return terminator;
         }
     }

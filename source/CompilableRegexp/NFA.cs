@@ -8,9 +8,19 @@ namespace CompilableRegexp
     {
         internal class NFANode
         {
-            internal Dictionary<char, NFANode> Moves = new Dictionary<char, NFANode>();
-            internal NFANode Any;
+            internal Dictionary<char, List<NFANode>> Moves = new Dictionary<char, List<NFANode>>();
+            internal List<NFANode> Any = new List<NFANode>();
             internal List<NFANode> Epsilon = new List<NFANode>();
+            internal void AddMove(char c, NFANode target)
+            {
+                if (Moves.ContainsKey(c))
+                    Moves[c].Add(target);
+                else
+                    Moves.Add(c, new List<NFANode>()
+                    {
+                        target
+                    });
+            }
         }
         internal NFANode Entry;
         internal NFANode Terminating;
