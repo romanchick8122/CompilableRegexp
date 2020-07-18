@@ -8,6 +8,7 @@ namespace CompilableRegexp.Syntax
         internal SyntaxElement Next;
         internal SyntaxElement Prev;
         internal SyntaxElement Parent;
+        internal abstract NFA.NFANode ToNFANode(NFA.NFANode entry);
         internal static SyntaxElement Parse(string regExp)
         {
             SyntaxElement ret = new DummyElement(), curr = ret;

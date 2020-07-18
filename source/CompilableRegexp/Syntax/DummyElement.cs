@@ -5,5 +5,11 @@ namespace CompilableRegexp.Syntax
 {
     internal class DummyElement : SyntaxElement
     {
+        internal override NFA.NFANode ToNFANode(NFA.NFANode entry)
+        {
+            if (Next == null)
+                return entry;
+            return Next.ToNFANode(entry);
+        }
     }
 }

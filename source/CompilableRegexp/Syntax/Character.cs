@@ -11,5 +11,12 @@ namespace CompilableRegexp.Syntax
         {
             Char = @char;
         }
+
+        internal override NFA.NFANode ToNFANode(NFA.NFANode entry)
+        {
+            var terminator = new NFA.NFANode();
+            entry.Moves.Add(Char, terminator);
+            return terminator;
+        }
     }
 }
