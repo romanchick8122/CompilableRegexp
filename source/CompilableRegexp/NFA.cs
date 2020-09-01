@@ -1,33 +1,32 @@
 ﻿// This is an open source non-commercial project. Dear PVS-Studio, please check it.
 // PVS-Studio Static Code Analyzer for C, C++, C#, and Java: http://www.viva64.com
+using CompilableRegexp.Collections;
 using System.Collections.Generic;
 
 namespace CompilableRegexp
 {
     internal class NFA
     {
-        internal class NFANode
+        internal class Node
         {
-            internal IDictionary<char, List<NFANode>> Moves = new Dictionary<char, List<NFANode>>();
-            internal List<NFANode> Epsilon = new List<NFANode>();
-            internal void AddMove(char c, NFANode target)
+            internal readonly HashSet<Node>[] Moves;
+            internal HashSet<Node> Epsilon = new HashSet<Node>();
+            internal Node(int dictSize)
             {
-                if (Moves.ContainsKey(c))
-                    Moves[c].Add(target);
-                else
-                    Moves.Add(c, new List<NFANode>()
-                    {
-                        target
-                    });
+                Moves = new HashSet<Node>[dictSize];
+                for (var i = 0; i < dictSize; i++)
+                    Moves[i] = new HashSet<Node>();
             }
         }
-        internal NFANode Entry;
-        internal NFANode Terminating;
+        internal RegexpCharDictionary dict;
+        internal Node Entry;
+        internal Node Terminating;
 
-        public NFA(NFANode entry, NFANode terminating)
+        public NFA(Node entry, Node terminating, RegexpCharDictionary dict)
         {
             Entry = entry;
             Terminating = terminating;
+            this.dict = dict;
         }
     }
 }
